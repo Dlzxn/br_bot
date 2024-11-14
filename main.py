@@ -16,6 +16,7 @@ import base64
 import logging.config
 import logging
 import asyncio
+from aiogram.types import ReplyKeyboardRemove, keyboard_button, ReplyKeyboardMarkup
 
 #пакеты локальные
 from us_r import us_rout

@@ -40,3 +40,17 @@ def from_bd(num: int, user_id: int):
             return row[num]
     cursor.close()
 #забирает номер столбца бд кот нуден и пользователя возвращает значение заданнного столбца
+
+def pars_all():
+    sqlite_connection = sqlite3.connect('bd/bd_users')
+    cursor = sqlite_connection.cursor()
+    sqlite_select_query = """SELECT * from users"""
+    start_log()
+    cursor.execute(sqlite_select_query)
+    records = cursor.fetchall()
+    sp_out=[]
+    for row in records:
+        sp_out.append(row[0])
+    cursor.close()
+    return sp_out
+#запрос всех юзеров --->список

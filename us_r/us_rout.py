@@ -23,9 +23,18 @@ import logging
 
 from func.defs import from_bd, ref_prov, db_table_val
 from log_cfg.log_def import start_log, user_new
+from keyboard.keyb import kb_menu
 
 router = Router()
 
+@router.message(Command(commands=['help']))
+async def process_help_command(message: Message):
+    await message.answer(f'Привет любителям прекрасной Беларуси!\n'
+                         f'Вас приветствует bot v1.0 by Dlzxn'
+                         f'Для начала введите /start'
+                         )
+
+    print(message)
 @router.message(Command(commands="start"))
 async def start(message:Message):
     print("start")
@@ -37,7 +46,6 @@ async def start(message:Message):
         db_table_val(user_id=us_id, user_name=us_name, user_surname=us_sname, username=username)
         user_new(us_name, us_id)
     await message.reply_photo(photo=FSInputFile('main_img/menu.jpg'),
-                              caption='Беларусь гордилась бы вами!')
-    # if (message.text[7:])!="" and (int(decode_payload(message.text[7:])))!=message.from_user.id:
-    #     zamena_para(int(decode_payload(message.text[7:])), message.from_user.id)
-    #     await message.answer(f'Теперь ВЫ и {from_bd(1, int(decode_payload(message.text[7:])))} пара!')
+                              caption='Беларусь гордилась бы вами!',
+                              reply_markup=kb_menu
+                              )
