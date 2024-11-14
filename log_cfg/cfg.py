@@ -37,7 +37,7 @@ logging_config = {
         'info_h': {
             'class': 'logging.FileHandler',
             'filename': 'files_log/info.log',
-            'mode': 'a',
+            'mode': 'w',
             'level': 'DEBUG',
             'formatter': 'formatter_start',
             'filters': ['info_filter']
@@ -52,7 +52,7 @@ logging_config = {
         'info_bas': {
             'class': 'logging.FileHandler',
             'filename': 'files_log/info.log',
-            'mode': 'a',
+            'mode': 'w',
             'level': 'DEBUG',
             'formatter': 'formatter_bd',
             'filters': ['info_filter']
