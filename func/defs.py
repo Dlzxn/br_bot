@@ -54,3 +54,92 @@ def pars_all():
     cursor.close()
     return sp_out
 #запрос всех юзеров --->список
+
+
+#рисует по бд картинку
+def pict():
+    sqlite_connection = sqlite3.connect('bd/bd_users')
+    cursor = sqlite_connection.cursor()
+    sqlite_select_query = """SELECT * from picture"""
+    cursor.execute(sqlite_select_query)
+    records = cursor.fetchall()
+    cursor.close()
+    sp=[[['0'], ['0'], ['0'], ['0'], ['0']], [['0'], ['0'], ['0'], ['0'], ['0']], [['0'], ['0'], ['0'], ['0'], ['0']], [['0'], ['0'], ['0'], ['0'], ['0']]]
+    s1=''
+    s2=''
+    s3=''
+    s4=''
+    for i in range(0,4):
+        for j in range(0, 5):
+            sp[i][j]='⬜️'
+    for row in records:
+        if row[1]!=None:
+            stroka=row[0]%10
+            stb=row[0]//10
+            if stb<3:
+                sp[stb-1][stroka-1]='🟥'
+            else:
+                sp[stb-1][stroka-1]='🟩'
+    for i in range(0, 5):
+        s1=s1+sp[0][i]
+        s2=s2+sp[1][i]
+        s3=s3+sp[2][i]
+        s4=s4+sp[3][i]
+    return s1, s2, s3, s4
+
+
+def pict_prov(nu):
+    nu=int(nu)
+    strk=(nu-1)//5+1
+    stlb=(nu-1)%5+1
+    st=str(strk)+str(stlb)
+    sqlite_connection = sqlite3.connect('bd/bd_users')
+    cursor = sqlite_connection.cursor()
+    sqlite_select_query = """SELECT * from picture"""
+    # start_log()
+    cursor.execute(sqlite_select_query)
+    records = cursor.fetchall()
+
+    for row in records:
+        if str(row[0])==st:
+            # cursor.close()
+            if row[1]!=None:
+                return True
+            else:
+                return False
+    cursor.close()
+    return False
+#проверка закрашена ли клетка
+
+def pict_us(nu):
+    nu=int(nu)
+    strk=(nu-1)//5+1
+    stlb=(nu-1)%5+1
+    st=str(strk)+str(stlb)
+    sqlite_connection = sqlite3.connect('bd/bd_users')
+    cursor = sqlite_connection.cursor()
+    sqlite_select_query = """SELECT * from picture"""
+    # start_log()
+    cursor.execute(sqlite_select_query)
+    records = cursor.fetchall()
+    for row in records:
+        if str(row[0])==st:
+            cursor.close()
+            return row[2]
+    cursor.close()
+    return False
+#вывод кто закрасил клетку
+
+def new_us_kl(num: int, user_id: int, user_name: str, username: str):
+    nu=int(num)
+    strk=(nu-1)//5+1
+    stlb=(nu-1)%5+1
+    st=str(strk)+str(stlb)
+    sqlite_connection = sqlite3.connect('bd/bd_users')
+    cursor = sqlite_connection.cursor()
+    start_log()
+    cursor.execute('UPDATE picture SET user_id = ? WHERE num = ?', (user_id, st))
+    cursor.execute('UPDATE picture SET user_name = ? WHERE num = ?', (user_name, st))
+    cursor.execute('UPDATE picture SET username = ? WHERE num = ?', (username, st))
+    sqlite_connection.commit()
+    sqlite_connection.close()
