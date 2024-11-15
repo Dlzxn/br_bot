@@ -9,19 +9,31 @@ from aiogram.fsm.storage.memory import MemoryStorage
 
 from ad_r.cla import FSMF
 
-from func.defs import pars_all
+from func.defs import pars_all, del_pict
 
 
 storage = MemoryStorage()
 router = Router()
 
 user_dict: dict[int, dict[str]] = {}
-
+#адм меню
 @router.message((F.text=="/adm") & (F.from_user.id==1007130027))
 async def adm_list(message: Message):
-    await message.answer(f'Вы-админ'
-                         f'парс- /pars'
+    await message.answer(f'Вы-админ\n'
+                         f'рассылка- /pars\n'
+                         f'Удаление флага /delflag'
                          )
+
+#админское удаление базы с флагом
+@router.message((F.text=="/delflag") & (F.from_user.id==1007130027))
+async def adm_list(message: Message, bot: Bot):
+    await message.answer(text="Начало удаления...")
+    del_pict()
+    su=pars_all()
+    for x in su:
+        await bot.send_message(x, "Обновление флага прошло успешно! Начинайте его красить!")
+    await message.answer(text="Ветвь удалена//Рассылка запущена")
+
 
 @router.message((F.text=="/pars") & (F.from_user.id==1007130027), StateFilter(default_state))
 async def adm_list(message: Message, bot: Bot, state: FSMContext):

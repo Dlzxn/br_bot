@@ -143,3 +143,23 @@ def new_us_kl(num: int, user_id: int, user_name: str, username: str):
     cursor.execute('UPDATE picture SET username = ? WHERE num = ?', (username, st))
     sqlite_connection.commit()
     sqlite_connection.close()
+
+
+
+
+
+#удаление из бд всех
+def del_pict():
+    sqlite_connection = sqlite3.connect('bd/bd_users')
+    cursor = sqlite_connection.cursor()
+    sqlite_select_query = """SELECT * from picture"""
+    # start_log()
+    cursor.execute(sqlite_select_query)
+    records = cursor.fetchall()
+    for row in records:
+        cursor.execute('UPDATE picture SET user_id = ? WHERE num = ?', (None, row[0]))
+        cursor.execute('UPDATE picture SET user_name = ? WHERE num = ?', (None, row[0]))
+        cursor.execute('UPDATE picture SET username = ? WHERE num = ?', (None, row[0]))
+        sqlite_connection.commit()
+    cursor.close()
+    sqlite_connection.close()

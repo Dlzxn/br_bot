@@ -133,7 +133,7 @@ async def zacr_kl(message: Message):
                          f'Теперь статус клетки:')
     await message.answer_photo(photo=FSInputFile('main_img/user.jpg'),
                                    caption=f'Данная клетка уже приобретена!\n'
-                                   f'Статус: закрашена'
+                                   f'Статус: закрашена\n'
                                    f'Владелец: {pict_us(kle)}\n',
                                    reply_markup=raska
                                    )
