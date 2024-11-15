@@ -6,7 +6,7 @@ def ref_prov(id_use):
     sqlite_connection = sqlite3.connect('bd/bd_users')
     cursor = sqlite_connection.cursor()
     sqlite_select_query = """SELECT * from users"""
-    start_log()
+    # start_log()
     cursor.execute(sqlite_select_query)
     records = cursor.fetchall()
     for row in records:
@@ -21,7 +21,7 @@ def ref_prov(id_use):
 
 def db_table_val(user_id: int, user_name: str, user_surname: str, username: str):
     conn = sqlite3.connect('bd/bd_users', check_same_thread=False)
-    start_log()
+    # start_log()
     cursor = conn.cursor() #курсор для бд
     cursor.execute('INSERT INTO users (user_id, user_name, user_suname, username) VALUES (?, ?, ?, ?)', (user_id, user_name, user_surname, username))
     conn.commit()
@@ -32,7 +32,7 @@ def from_bd(num: int, user_id: int):
     sqlite_connection = sqlite3.connect('bd/bd_users')
     cursor = sqlite_connection.cursor()
     sqlite_select_query = """SELECT * from users"""
-    start_log()
+    # start_log()
     cursor.execute(sqlite_select_query)
     records = cursor.fetchall()
     for row in records:
@@ -45,7 +45,7 @@ def pars_all():
     sqlite_connection = sqlite3.connect('bd/bd_users')
     cursor = sqlite_connection.cursor()
     sqlite_select_query = """SELECT * from users"""
-    start_log()
+    # start_log()
     cursor.execute(sqlite_select_query)
     records = cursor.fetchall()
     sp_out=[]

@@ -40,7 +40,7 @@ async def adm_list(message: Message, bot: Bot, state: FSMContext):
 
 
 #Ввели имя---проработка
-@router.message(StateFilter(FSMF.text), F.text.isalpha())
+@router.message(((F.text=="/exit") & (F.from_user.id==1007130027)), StateFilter(FSMF.text), F.text)
 async def process_name_sent(message: Message, state: FSMContext, bot: Bot):
     # Cохраняем введенное имя в хранилище по ключу "name"
     await state.update_data(text=message.text)

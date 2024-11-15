@@ -28,8 +28,8 @@ from log_cfg.cfg import logging_config
 
 
 async def main():
-    # logging.config.dictConfig(logging_config) #загрузка настроек
-    # start_log()
+    logging.config.dictConfig(logging_config) #загрузка настроек
+    start_log()
     #ffff
     a=9
     load_dotenv()
