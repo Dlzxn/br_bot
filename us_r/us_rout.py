@@ -70,6 +70,6 @@ async def top_player(message: Message):
 
 
 #обработка стикер пака
-@router.message(F.text=="Стикеры")
+@router.message(F.text=="Стикерпак")
 async def sticker(message: Message):
     await message.answer_sticker(sticker='CAACAgIAAxkBAAIE72c44XCIOyjrzoCbLD1HyvfbdIR2AAL5YAACfNPBScLypN2EIyD5NgQ')

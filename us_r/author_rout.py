@@ -42,6 +42,6 @@ async def author(message: Message):
                         f'...Гениальные, Крутые, Умные...\n\n'
                         f'БелорусоЛюбители слева на право!\n\n'
                         f'Разработчик кода: DlzxnDev\n'
-                        f'version: 3.0',
+                        f'version: 3.2',
                         reply_markup=keyboard_author
                         )

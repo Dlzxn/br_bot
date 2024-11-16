@@ -4,7 +4,7 @@ from aiogram.types import ReplyKeyboardRemove, KeyboardButton, ReplyKeyboardMark
 
 bu_game=KeyboardButton(text='Игра🎮')
 bu_rask=KeyboardButton(text="Раскраска")
-bu_stick=KeyboardButton(text="Стикеры")
+bu_stick=KeyboardButton(text="Стикерпак")
 bu_music=KeyboardButton(text="Беларусская Музыка🎼")
 bu_author=KeyboardButton(text="Авторы🎬")
 nu_like=KeyboardButton(text="❤️")
