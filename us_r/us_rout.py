@@ -33,7 +33,9 @@ from us_r.cla import FSMF
 
 router = Router()
 
-
+# @router.message(F.sticker)
+# async def ffff(message: Message):
+#     print(message)
 @router.message(Command(commands=['help']))
 async def process_help_command(message: Message):
     await message.answer(f'Привет любителям прекрасной Беларуси!\n'
@@ -65,3 +67,9 @@ async def top_player(message: Message):
                                f'🥇ЛУЧШИЙ БЕЛАРУС: {sp_us[2]}-Закрашено: {sp_col[2]}\n'
                                f'🎉TOP 2: {sp_us[1]}-Закрашено: {sp_col[1]}\n'
                                f'🎉TOP 3: {sp_us[0]}-Закрашено: {sp_col[0]}')
+
+
+#обработка стикер пака
+@router.message(F.text=="Стикеры")
+async def sticker(message: Message):
+    await message.answer_sticker(sticker='CAACAgIAAxkBAAIE72c44XCIOyjrzoCbLD1HyvfbdIR2AAL5YAACfNPBScLypN2EIyD5NgQ')
