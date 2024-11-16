@@ -1,6 +1,7 @@
 import aiogram
 from aiogram.types import ReplyKeyboardRemove, KeyboardButton, ReplyKeyboardMarkup
 
+
 bu_game=KeyboardButton(text='Игра🎮')
 bu_stick=KeyboardButton(text="Раскраска")
 bu_music=KeyboardButton(text="Беларусская Музыка🎼")

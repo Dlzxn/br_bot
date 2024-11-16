@@ -64,7 +64,7 @@ nu=0
 @router.message((F.text=="Беларусская Музыка🎼") | (F.text=='👎'))
 async def mus(message: Message, state: FSMContext):
     global nu
-    nu=randint(1, 2)
+    nu=randint(1, 8)
     s='music/'+str(nu)+"b.mp3"
     # await message.reply_document(document=FSInputFile('music/1.mp3'))
     await message.answer_audio(audio=FSInputFile(s, 'rb'), protect_content=True,
@@ -91,49 +91,3 @@ async def process_name_sent(message: Message, state: FSMContext, bot: Bot):
     await state.set_state(state=None)
 
 #закончил раздел фсм--------------------------------------------------------------------------------------
-
-
-
-#БЛОК РАЗДЕЛА РИСОВАННЫЙ ФЛАГ-----------------------------------------------------------------------------
-@router.message(F.text=="Раскраска")
-async def rask(message:Message):
-    s1, s2, s3, s4=pict()
-    await message.answer(text=f'Раскрась флаг Белоруси🇧🇾\n'
-                         f'{s1}\n'
-                         f'{s2}\n'
-                         f'{s3}\n'
-                         f'{s4}\n',
-                         reply_markup=num_key)
-
-#выбор по номеру
-@router.message(F.text.in_([str(i) for i in range(1, 21)]))
-async def chislo(message: Message):
-    if pict_prov(message.text)==True:
-        await message.answer_photo(photo=FSInputFile('main_img/user.jpg'),
-                                   caption=f'Данная клетка уже приобретена!\n'
-                                   f'Владелец: {pict_us(message.text)}\n'
-                                   f'Не расстраивайся!\n'
-                                   f'Есть еще много красивых клеток!',
-                                   reply_markup=raska
-                                   )
-    else:
-        await message.answer_photo(photo=FSInputFile('main_img/us_tr.jpg'),
-                                   caption=f'Данная клетка еще не занята!\n'
-                                   f'Скорее занимай!',
-                                   reply_markup=num_buy
-                                   )
-        global kle
-        kle=message.text
-
-#закрашивание
-@router.message(F.text=="Закрасить")
-async def zacr_kl(message: Message):
-    new_us_kl(kle, message.from_user.id, message.from_user.first_name, message.from_user.username)
-    await message.answer(text=f'Поздравляю, вы закрасили клетку {kle}!\n'
-                         f'Теперь статус клетки:')
-    await message.answer_photo(photo=FSInputFile('main_img/user.jpg'),
-                                   caption=f'Данная клетка уже приобретена!\n'
-                                   f'Статус: закрашена\n'
-                                   f'Владелец: {pict_us(kle)}\n',
-                                   reply_markup=raska
-                                   )

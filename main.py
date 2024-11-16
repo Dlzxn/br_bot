@@ -19,7 +19,7 @@ import asyncio
 from aiogram.types import ReplyKeyboardRemove, keyboard_button, ReplyKeyboardMarkup
 
 #пакеты локальные
-from us_r import us_rout
+from us_r import us_rout, pict_ro, author_rout
 from ad_r import ad_rout
 from log_cfg.log_def import start_log, user_new
 from log_cfg.cfg import logging_config
@@ -36,8 +36,9 @@ async def main():
     bot = Bot(os.getenv('TOKEN'))
     dp = Dispatcher()
     #роутеры
-
     dp.include_router(us_rout.router)
+    dp.include_router(pict_ro.router)
+    dp.include_router(author_rout.router)
     dp.include_router(ad_rout.router)
 
     await dp.start_polling(bot)
