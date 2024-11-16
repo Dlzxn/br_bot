@@ -54,11 +54,14 @@ async def start(message:Message):
                               caption='Беларусь гордилась бы вами!',
                               reply_markup=kb_menu
                               )
+
+
+#Обработка и выводтоп игроков
 @router.message(F.text=="ТОП-игроков")
 async def top_player(message: Message):
     sp_us, sp_col= stat_us()
     await message.answer_photo(photo=FSInputFile("main_img/stat.jpg"),
                                caption=f'💡САМЫЕ АКТИВНЫЕ ПОЛЬЗОВАТЕЛИ:\n'
-                               f'🥇ЛУЧШИЙ БЕЛОРУС: {sp_us[2]}-Клеток закрашено: {sp_col[2]}\n'
-                               f'🎉TOP 2: {sp_us[1]}-Клеток закрашено: {sp_col[1]}\n'
-                               f'🎉TOP 3: {sp_us[0]}-Клеток закрашено: {sp_col[0]}')
+                               f'🥇ЛУЧШИЙ БЕЛАРУС: {sp_us[2]}-Закрашено: {sp_col[2]}\n'
+                               f'🎉TOP 2: {sp_us[1]}-Закрашено: {sp_col[1]}\n'
+                               f'🎉TOP 3: {sp_us[0]}-Закрашено: {sp_col[0]}')

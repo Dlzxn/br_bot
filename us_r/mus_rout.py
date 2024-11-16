@@ -48,7 +48,7 @@ async def mus(message: Message, state: FSMContext):
     await message.answer_audio(audio=FSInputFile(s, 'rb'), protect_content=True,
                               reply_markup=like_menu,
                               caption=f'Если понравилась-жми ❤️\n'
-                              f'И слушай оригинал!\n'
+                              f'И слушай полную версию!\n'
                               f'Если нет-👎'
                               )
     await state.set_state(FSMF.text)
@@ -62,7 +62,7 @@ async def process_name_sent(message: Message, state: FSMContext, bot: Bot):
     s='music/'+str(nu)+".mp3"
     await message.answer_audio(audio=FSInputFile(s, 'rb'), protect_content=True,
                               reply_markup=like_menu,
-                              caption=f'Проникнись Белорусским шедевром!')
+                              caption=f'Проникнись Беларусским шедевром!')
     # await state.update_data(text=message.sticker)
     # user_dict[message.from_user.id] = await state.get_data()
     # await state.clear()

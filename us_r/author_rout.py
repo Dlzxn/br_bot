@@ -39,7 +39,7 @@ async def author(message: Message):
     await message.answer(text=f'Внимание, перед вашими глазами...')
     await message.answer_photo(photo=FSInputFile('author_img/menu.jpg'),
                         caption=f'Вот они...\n'
-                        f'...Гениальный, Крутые, Умные...\n\n'
-                        f'Белорусолюбители слева на право!\n',
+                        f'...Гениальные, Крутые, Умные...\n\n'
+                        f'БелорусоЛюбители слева на право!\n',
                         reply_markup=keyboard_author
                         )
