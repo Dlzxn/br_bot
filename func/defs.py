@@ -163,3 +163,44 @@ def del_pict():
         sqlite_connection.commit()
     cursor.close()
     sqlite_connection.close()
+
+
+#парсинг топ юзера
+def stat_us():
+    sqlite_connection = sqlite3.connect('bd/bd_users')
+    cursor = sqlite_connection.cursor()
+    sqlite_select_query = """SELECT * from users"""
+    # start_log()
+    cursor.execute(sqlite_select_query)
+    records = cursor.fetchall()
+    sp_us=['', '', '']
+    sp_kol=[0, 0, 0]
+    for row in records:
+        print(sp_us, sp_kol)
+        if int(row[5])>sp_kol[0]:
+            sp_kol[0]=int(row[5])
+            sp_us[0]='@'+row[3]
+            if sp_kol[1]<sp_kol[0]:
+                sp_kol[1], sp_kol[0]=sp_kol[0], sp_kol[1]
+                sp_us[1], sp_us[0]=sp_us[0], sp_us[1]
+                if sp_kol[2]<sp_kol[1]:
+                    sp_kol[2], sp_kol[1]=sp_kol[1], sp_kol[2]
+                    sp_us[2], sp_us[1]=sp_us[1], sp_us[2]
+    for i in range(len(sp_us)):
+        if sp_us[i]=='':
+            sp_us[i]="❌"
+    return sp_us, sp_kol
+
+#введение закраски клетки
+def top_up(id: int):
+    sqlite_connection = sqlite3.connect('bd/bd_users')
+    cursor = sqlite_connection.cursor()
+    sqlite_select_query = """SELECT * from users"""
+    # start_log()
+    cursor.execute(sqlite_select_query)
+    records = cursor.fetchall()
+    for row in records:
+        if int(row[0])==id:
+            cursor.execute('UPDATE users SET rate = ? WHERE user_id = ?', (int(row[5])+1, id))
+            break
+    sqlite_connection.commit()

@@ -25,7 +25,7 @@ from aiogram.fsm.storage.memory import MemoryStorage
 
 
 
-from func.defs import from_bd, ref_prov, db_table_val, pict, pict_prov, pict_us, new_us_kl
+from func.defs import from_bd, ref_prov, db_table_val, pict, pict_prov, pict_us, new_us_kl, top_up
 from log_cfg.log_def import start_log, user_new
 from keyboard.keyb import kb_menu, like_menu, num_key, raska, num_buy
 from us_r.cla import FSMF
@@ -69,6 +69,7 @@ async def chislo(message: Message):
 @router.message(F.text=="Закрасить")
 async def zacr_kl(message: Message):
     new_us_kl(kle, message.from_user.id, message.from_user.first_name, message.from_user.username)
+    top_up(message.from_user.id)
     await message.answer(text=f'Поздравляю, вы закрасили клетку {kle}!\n'
                          f'Теперь статус клетки:')
     await message.answer_photo(photo=FSInputFile('main_img/user.jpg'),
