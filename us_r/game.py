@@ -93,7 +93,7 @@ async def otg(message: Message, bot: Bot):
             base_game[nu].slov_sh=bucv_otg(message.text, base_game[nu].slov, base_game[nu].slov_sh)
             top_up(message.from_user.id)
             await message.answer(text=f"Правильно!\n"
-                                 f'Вы получаете +1 балл в рейтинг\n!'
+                                 f'Вы получаете +1 балл в рейтингу!\n'
                            f'Теперь слово: {base_game[nu].slov_sh}')
             so=prot(base_game, nu, message.from_user.id)
             if so!=None:
@@ -105,12 +105,12 @@ async def otg(message: Message, bot: Bot):
             top_up5(message.from_user.id)
             await message.answer(text=f'Идеально!\n'
                                  f'Все буквы отгаданы!\n'
-                                 f'Слово было: {base_game[nu].slov_sh}')
+                                 f'Слово было: {base_game[nu].slov_}')
             so=prot(base_game, nu, message.from_user.id)
             if so!=None:
                 await bot.send_message(so, f'Идеально!\n'
                                  f'Все буквы отгаданы!\n'
-                                 f'Слово было: {base_game[nu].slov_sh}')
+                                 f'Слово было: {base_game[nu].slov}')
                 us_in_game.remove(so)
             us_in_game.remove(message.from_user.id)
             base_game.pop(nu)
