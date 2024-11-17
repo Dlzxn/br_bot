@@ -100,6 +100,7 @@ async def sel_game(message: Message):
     nur=num_u(base_game, message.from_user.id)
     if nur!=52:
         base_game.pop(nur)
+        us_in_game.remove(message.from_user.id)
         await message.answer(text= "Игра удалена")
         await message.answer(text=open_panel(base_game),
                          reply_markup=open_sour(base_game))
@@ -181,7 +182,7 @@ async def otg(message: Message, bot: Bot):
             us_in_game.remove(message.from_user.id)
             base_game.pop(nu)
         else:
-            message.answer(text="Увы, но это другое слово")
+            await message.answer(text="Увы, но это другое слово")
 
 
 
@@ -191,6 +192,7 @@ async def otg(message: Message, bot: Bot):
 #вход в игру со стороны юзера
 @router.message(F.text[:4]=="Игра")
 async def game_in(message: Message):
+    print("fff")
     nu=int(message.text[-1])-1
     if base_game[nu].us2==None:
         base_game[nu].us2=message.from_user.id
@@ -203,5 +205,7 @@ async def game_in(message: Message):
                     f'Отгадывайте буквы или слово целиком',
                     reply_markup=clava_st_game())
     else:
-        message.answer(text=f"Игра уже началась\n"
-                       f'Вы не можете к ней присоединиться')
+        print("ddd")
+        await message.answer(text=f"Игра уже началась\n"
+                       f'Вы не можете к ней присоединиться\n\n'
+                       f'Счет игры: {base_game[nu].n_us1} {base_game[nu].s1_bal}:{base_game[nu].s2_bal} {base_game[nu].n_us2}')
