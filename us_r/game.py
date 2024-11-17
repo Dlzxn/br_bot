@@ -178,7 +178,7 @@ async def otg(message: Message, bot: Bot):
                 base_game[nu].s2_bal+=1
             await message.answer(text=f'Идеально!\n'
                                  f'Все буквы отгаданы!\n'
-                                 f'Вы получаете +1 рейтинг'
+                                 f'Вы получаете +1 рейтинг\n'
                                  f'Счет: {base_game[nu].n_us1} {base_game[nu].s1_bal}:{base_game[nu].s2_bal} {base_game[nu].n_us2}\n'
                                  f'Слово было: {base_game[nu].slov}')
             so=prot(base_game, nu, message.from_user.id)

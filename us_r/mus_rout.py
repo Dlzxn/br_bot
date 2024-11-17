@@ -42,7 +42,7 @@ nu=0
 @router.message((F.text=="Беларусская Музыка🎼") | (F.text=='👎') | (F.text=='⏩'))
 async def mus(message: Message, state: FSMContext):
     global nu
-    nu=randint(1, 8)
+    nu=randint(1, 13)
     s='music/'+str(nu)+"b.mp3"
     # await message.reply_document(document=FSInputFile('music/1.mp3'))
     await message.answer_audio(audio=FSInputFile(s, 'rb'), protect_content=True,
