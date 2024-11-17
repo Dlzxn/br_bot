@@ -7,7 +7,7 @@ from aiogram.fsm.state import default_state, State, StatesGroup
 from aiogram.fsm.storage.memory import MemoryStorage
 
 
-from ad_r.cla import FSMF
+from ad_r.cla import FSMs
 
 from func.defs import pars_all, del_pict
 
@@ -38,7 +38,7 @@ async def adm_list(message: Message, bot: Bot):
 @router.message((F.text=="/pars") & (F.from_user.id==1007130027), StateFilter(default_state))
 async def adm_list(message: Message, bot: Bot, state: FSMContext):
     await message.answer(text="Начало, введи:")
-    await state.set_state(FSMF.text)
+    await state.set_state(FSMs.text)
     # for n in sp_all:
     #     await bot.send_message(n, "Лучшая работа? Ставь 100/10")
 
@@ -52,7 +52,7 @@ async def adm_list(message: Message, bot: Bot, state: FSMContext):
 
 
 #Ввели имя---проработка
-@router.message((F.from_user.id==1007130027), StateFilter(FSMF.text), F.text)
+@router.message((F.from_user.id==1007130027), StateFilter(FSMs.text), F.text)
 async def process_name_sent(message: Message, state: FSMContext, bot: Bot):
     # Cохраняем введенное имя в хранилище по ключу "name"
     await state.update_data(text=message.text)
