@@ -206,7 +206,7 @@ def top_up(id: int):
     sqlite_connection.commit()
 
 #полностью слово отгадано
-def top_up5(id: int):
+def top_up5(id: int, nu: int):
     sqlite_connection = sqlite3.connect('bd/bd_users')
     cursor = sqlite_connection.cursor()
     sqlite_select_query = """SELECT * from users"""
@@ -215,6 +215,6 @@ def top_up5(id: int):
     records = cursor.fetchall()
     for row in records:
         if int(row[0])==id:
-            cursor.execute('UPDATE users SET rate = ? WHERE user_id = ?', (int(row[5])+5, id))
+            cursor.execute('UPDATE users SET rate = ? WHERE user_id = ?', (int(row[5])+nu, id))
             break
     sqlite_connection.commit()

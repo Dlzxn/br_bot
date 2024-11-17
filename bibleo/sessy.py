@@ -107,3 +107,11 @@ def prot(sp, cd, id):
         return sp[cd].us2
     elif sp[cd].us2==id:
         return sp[cd].us1
+
+
+#выдача локально баллов
+def bal(sp, nu, col, id):
+    if sp[nu].us1==id:
+        return 1
+    else:
+        return 2

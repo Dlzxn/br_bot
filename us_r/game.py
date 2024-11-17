@@ -26,7 +26,7 @@ from aiogram.types import ReplyKeyboardRemove, KeyboardButton, ReplyKeyboardMark
 
 from bibleo.bib import sp
 from random import randint
-from bibleo.sessy import ses, open_sour, base_game, open_panel, prov_igr, my_game, clava_del, clava_st_game, num_u, bucv_otg, prot
+from bibleo.sessy import ses, open_sour, base_game, open_panel, prov_igr, my_game, clava_del, clava_st_game, num_u, bucv_otg, prot, bal
 from func.defs import top_up, top_up5
 
 router = Router()
@@ -87,7 +87,6 @@ async def start_game(message:Message, bot: Bot):
 @router.message((F.text & F.from_user.id.in_(us_in_game)))
 async def otg(message: Message, bot: Bot):
     nu=num_u(base_game, message.from_user.id)
-    await message.answer(text= "otgadaaaaal")
     if len(message.text)==1:
         if message.text in base_game[nu].slov or (message.text).lower() in base_game[nu].slov:
             base_game[nu].slov_sh=bucv_otg(message.text, base_game[nu].slov, base_game[nu].slov_sh)
@@ -95,6 +94,11 @@ async def otg(message: Message, bot: Bot):
             await message.answer(text=f"Правильно!\n"
                                  f'Вы получаете +1 балл в рейтингу!\n'
                            f'Теперь слово: {base_game[nu].slov_sh}')
+            wh=bal(base_game, nu, 1, message.from_user.id)
+            if wh==1:
+                base_game[nu].s1_bal+=1
+            if wh==2:
+                base_game[nu].s2_bal+=1
             so=prot(base_game, nu, message.from_user.id)
             if so!=None:
                 await bot.send_message(so, f"Ваш соперник отгадал букву!\n"
@@ -102,10 +106,16 @@ async def otg(message: Message, bot: Bot):
         else:
             await message.answer(text="Увы, но такой буквы в слове нет!")
         if base_game[nu].slov_sh==base_game[nu].slov:
-            top_up5(message.from_user.id)
+            top_up(message.from_user.id)
+            wh=bal(base_game, nu, 1, message.from_user.id)
+            if wh==1:
+                base_game[nu].s1_bal+=1
+            if wh==2:
+                base_game[nu].s2_bal+=1
             await message.answer(text=f'Идеально!\n'
                                  f'Все буквы отгаданы!\n'
-                                 f'Слово было: {base_game[nu].slov_}')
+                                 f'Вы получаете +1 рейтинг'
+                                 f'Слово было: {base_game[nu].slov}')
             so=prot(base_game, nu, message.from_user.id)
             if so!=None:
                 await bot.send_message(so, f'Идеально!\n'
@@ -116,15 +126,23 @@ async def otg(message: Message, bot: Bot):
             base_game.pop(nu)
     if len(message.text)==len(base_game[nu].slov):
         if (message.text).lower()==base_game[nu].slov:
-            top_up5(message.from_user.id)
+            bals=(len(base_game[nu].slov)-base_game[nu].s1_bal-base_game[nu].s2_bal)
+            wh=bal(base_game, nu, 1, message.from_user.id)
+            if wh==1:
+                base_game[nu].s1_bal+=bals
+            if wh==2:
+                base_game[nu].s2_bal+=bals
+            top_up5(message.from_user.id, bals)# --------------------------------
             await message.answer(text=f'Идеально!\n'
                                  f'Ты отгадал слово!\n'
-                                 f'Вы получаете +5 к рейтингу\n'
-                                 f'Слово было: {base_game[nu].slov_sh}')
+                                 f'Вы получаете +{bals} к рейтингу\n'
+                                 f'Слово было: {base_game[nu].slov}')
             so=prot(base_game, nu, message.from_user.id)
             if so!=None:
                 await bot.send_message(so, f"Ваш соперник отгадал слово полностью!\n"
-                           f'слово было: {base_game[nu].slov_sh}')
+                           f'слово было: {base_game[nu].slov}')
                 us_in_game.remove(so)
             us_in_game.remove(message.from_user.id)
             base_game.pop(nu)
+        else:
+            message.answer(text="Увы, но это другое слово")
