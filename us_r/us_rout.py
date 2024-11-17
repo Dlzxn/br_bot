@@ -64,9 +64,9 @@ async def top_player(message: Message):
     sp_us, sp_col= stat_us()
     await message.answer_photo(photo=FSInputFile("main_img/stat.jpg"),
                                caption=f'💡САМЫЕ АКТИВНЫЕ ПОЛЬЗОВАТЕЛИ:\n'
-                               f'🥇ЛУЧШИЙ БЕЛАРУС: {sp_us[2]}-Закрашено: {sp_col[2]}\n'
-                               f'🎉TOP 2: {sp_us[1]}-Закрашено: {sp_col[1]}\n'
-                               f'🎉TOP 3: {sp_us[0]}-Закрашено: {sp_col[0]}')
+                               f'🥇ЛУЧШИЙ БЕЛАРУС: {sp_us[2]}-Рейтинг: {sp_col[2]}\n'
+                               f'🎉TOP 2: {sp_us[1]}-Рейтинг: {sp_col[1]}\n'
+                               f'🎉TOP 3: {sp_us[0]}-Рейтинг: {sp_col[0]}')
 
 
 #обработка стикер пака

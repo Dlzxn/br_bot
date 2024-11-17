@@ -29,7 +29,7 @@ def open_panel(sp):
     s=f'Все игры в данный момент:\n\n'
     for i in range(0, len(sp)):
         if sp[i].sost==False:
-            stat='Неактивна'
+            stat='Ожидание второго игрока'
         else:
             stat='В игре'
         s2=(f'🎮Игра {i+1}\n'
@@ -75,7 +75,7 @@ def one_game(sp, id):
         return False
 
 def clava_del():
-    bust=[[KeyboardButton(text="Удалить игру")]]
+    bust=[[KeyboardButton(text="Удалить игру")], [KeyboardButton(text="Начать игру")]]
     nur_key=ReplyKeyboardMarkup(keyboard=bust, resize_keyboard=True, input_field_placeholder="Ожидание игрока")
     return nur_key
 
@@ -101,7 +101,7 @@ def bucv_otg(bu, st, std):
     return s
 
 
-#чат ид противника
+#ид противника
 def prot(sp, cd, id):
     if sp[cd].us1==id:
         return sp[cd].us2
