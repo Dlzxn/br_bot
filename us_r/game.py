@@ -36,8 +36,40 @@ router = Router()
 server=ses()
 
 us_in_game=[]
+#неактив
+def neact():
+    print("fffffffff")
+    for i in range(len(base_game)):
+        print("fff")
+        for i in range(len(base_game)):
+            print(base_game[i].time_start)
+            if time.time()-base_game[i].time_start>180 and base_game[i].sost==False:
+                us1=base_game[i].us1
+                us2=base_game[i].us2
+                print(us2)
+                if us2==None:
+                    us2=0
+                us_in_game.remove(base_game[i].us1)
+                # await bot.send_message(base_game[i].us1, "Ваша игра удалена из-за неактивности")
+                try:
+                    # await bot.send_message(base_game[i].us2, "Ваша игра удалена из-за неактивности")
+                    us_in_game.remove(base_game[i].us2)
+                except:
+                    print("нет 2-го юзера")
+                base_game.pop(i)
+                return us1, us2
+    return False, False
+
+
+
 @router.message(F.text=="Игра🎮")
-async def game(message: Message):
+async def game(message: Message, bot: Bot):
+    l1, l2=neact()
+    if l1!=False:
+        await bot.send_message(l1, "Ваша игра удалена из-за неактивности")
+        if l2!=0:
+            await bot.send_message(l2, "Ваша игра удалена из-за неактивности")
+
     if prov_igr(base_game, message.from_user.id)==False :
         await message.answer(text=open_panel(base_game),
                          reply_markup=open_sour(base_game))

@@ -1,4 +1,5 @@
 import aiogram
+import time
 from aiogram.types import ReplyKeyboardRemove, KeyboardButton, ReplyKeyboardMarkup
 
 
@@ -15,6 +16,7 @@ class ses():
     len_b: int=None
     slov: str=None
     slov_sh: str=None
+
 
 
 base_game=[]

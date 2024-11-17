@@ -12,6 +12,7 @@ nu_dislike=KeyboardButton(text="👎")
 bu_buy=KeyboardButton(text="Закрасить")
 ras=KeyboardButton(text="Раскраска")
 top_game=KeyboardButton(text='ТОП-игроков')
+nu_next=KeyboardButton(text="⏩")
 
 
 
@@ -26,3 +27,4 @@ kb_menu=ReplyKeyboardMarkup(keyboard=[[bu_music], [bu_game, bu_stick, bu_rask], 
 like_menu=ReplyKeyboardMarkup(keyboard=[[nu_like, nu_dislike]], input_field_placeholder="Как вам трек?", resize_keyboard=True)
 raska=ReplyKeyboardMarkup(keyboard=rask, input_field_placeholder="Как вам трек?", resize_keyboard=True)
 num_buy=ReplyKeyboardMarkup(keyboard=k_buy, resize_keyboard=True, input_field_placeholder="Выберите кнопку")
+next_menu=ReplyKeyboardMarkup(keyboard=[[nu_next]], input_field_placeholder="Как вам трек?", resize_keyboard=True)

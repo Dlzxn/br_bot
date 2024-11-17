@@ -27,7 +27,7 @@ from aiogram.fsm.storage.memory import MemoryStorage
 
 from func.defs import from_bd, ref_prov, db_table_val, pict, pict_prov, pict_us, new_us_kl
 from log_cfg.log_def import start_log, user_new
-from keyboard.keyb import kb_menu, like_menu, num_key, raska, num_buy
+from keyboard.keyb import kb_menu, like_menu, num_key, raska, num_buy, next_menu
 from us_r.cla import FSMF
 
 storage = MemoryStorage()
@@ -39,7 +39,7 @@ user_dict: dict[int, dict[str]] = {}
 
 nu=0
 #запрос музыки
-@router.message((F.text=="Беларусская Музыка🎼") | (F.text=='👎'))
+@router.message((F.text=="Беларусская Музыка🎼") | (F.text=='👎') | (F.text=='⏩'))
 async def mus(message: Message, state: FSMContext):
     global nu
     nu=randint(1, 8)
@@ -61,7 +61,7 @@ async def process_name_sent(message: Message, state: FSMContext, bot: Bot):
     # Cохраняем введенное имя в хранилище по ключу "name"
     s='music/'+str(nu)+".mp3"
     await message.answer_audio(audio=FSInputFile(s, 'rb'), protect_content=True,
-                              reply_markup=like_menu,
+                              reply_markup=next_menu,
                               caption=f'Проникнись Беларусским шедевром!')
     # await state.update_data(text=message.sticker)
     # user_dict[message.from_user.id] = await state.get_data()
