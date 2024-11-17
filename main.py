@@ -36,12 +36,12 @@ async def main():
     bot = Bot(os.getenv('TOKEN'))
     dp = Dispatcher()
     #роутеры
+    dp.include_router(ad_rout.router)
     dp.include_router(us_rout.router)
     dp.include_router(mus_rout.router)
     dp.include_router(pict_ro.router)
     dp.include_router(author_rout.router)
     dp.include_router(game.router)
-    dp.include_router(ad_rout.router)
 
     await dp.start_polling(bot)
 
