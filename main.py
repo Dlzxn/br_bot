@@ -18,7 +18,7 @@ import logging
 import asyncio
 from aiogram.types import ReplyKeyboardRemove, keyboard_button, ReplyKeyboardMarkup
 import time
-print("fffffff")
+print("fff")
 #пакеты локальные
 from us_r import us_rout, pict_ro, author_rout, mus_rout, game
 from ad_r import ad_rout
